@@ -21,9 +21,7 @@ function getPairedDevices(request, response, next) {
     let userId = request.loggedInUserDetails || request.loggedInUserDetails.userId;
     let houseIds = request.params.houseIds;
     
-    // TODO - Add pagination
     return DeviceService.getPairedDevicesAndStats(userId, houseIds)
-        .then(createResponse)
         .then(sendResponse)
         .catch(handleError);
 }
@@ -39,7 +37,7 @@ function addDevice(request, response, next) {
 
     return DeviceService.addDevice(request.body)
         .then(addDeviceDetailsForUser)
-        .then(createResponse)
+        .then(createResponse('Device added successfuly'))
         .then(sendResponse)
         .catch(handleError);
 }
@@ -56,7 +54,7 @@ function removeDevice(request, response, next) {
     let userId = request.loggedInUserDetails.userId;
     return Device.removeDevice(deviceId)
         .then(User.removeDeviceFromList(userId, deviceId))
-        .then(createResponse)
+        .then(createResponse('Device removed successfuly'))
         .then(sendResponse)
         .catch(handleError);
 }
@@ -71,7 +69,16 @@ function updateDevice(request, response, next) {
 
     let deviceId =request.params.deviceId;
     return DeviceService.updateDevice(deviceId, request.body)
-        .then(createResponse)
+        .then(createResponse('Device updated successfuly'))
         .then(sendResponse)
         .catch(handleError);
+}
+
+function createResponse(message) {
+    return function() {
+        return {
+            error: false,
+            message
+        };
+    }
 }

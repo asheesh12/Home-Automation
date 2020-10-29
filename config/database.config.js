@@ -19,6 +19,7 @@ const dbConnection = connection.useDb('homeAutomation');
 exports.addModel = addModel;
 exports.getModel = getModel;
 exports.Schema = mongoose.Schema;
+exports.Type = mongoose.Types;
 
 function addModel(schemaName, schema) {
     dbConnection.model(schemaName, schema);
