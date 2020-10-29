@@ -67,7 +67,7 @@ Device Schema
     company - String
     mqttTopic - String
     user - ObjectId
-    locationId - String
+    houseIds - String
 
 
 NPM packages:-
