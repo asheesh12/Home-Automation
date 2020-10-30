@@ -1,11 +1,15 @@
+const mongoose = require('./mongoose');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Establishing mongo connection and Registering schemas 
+mongoose.initialiseDatabase();
+
 var indexRouter = require('./routes/index.route');
-var usersRouter = require('./routes/users.route');
+// var usersRouter = require('./routes/users.route');
 var devicesRouter = require('./routes/devices.route');
 
 var app = express();
@@ -21,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/devices', devicesRouter);
 
 // catch 404 and forward to error handler

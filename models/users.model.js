@@ -21,6 +21,8 @@ UserSchema.statics.removeDeviceFromList = removeDeviceFromList;
 
 const User = database.addModel('Users', UserSchema);
 
+module.exports = User;
+
 /**
  * Finds a user record based on his email address
  * @author Asheesh Bhuria

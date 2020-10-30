@@ -31,9 +31,9 @@ function handleError(response, error) {
 }
 
 function handleResponse(response, statusCode, apiResponse) {
-    if (!data) return sendServerErrorResponse(response);
+    if (!apiResponse) return sendServerErrorResponse(response);
     if (statusCode) return response.status(statusCode);
-    response.send(data);
+    response.send(apiResponse);
 }
 
 function sendServerErrorResponse(response) {
