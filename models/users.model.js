@@ -74,7 +74,9 @@ function removeDeviceFromList(userId, deviceId) {
 
 function getAggregationQueryToMatchUser(userId) {
     return {  
-        "$match": Type.ObjectId(userId)
+        "$match": {
+            _id: new Type.ObjectId(userId)
+        }
     }
 }
 

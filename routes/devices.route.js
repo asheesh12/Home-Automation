@@ -7,7 +7,7 @@ const { validateRequest } = require('../services/validator');
 
 router.get('/available/:houseId', decodeUserToken, pairedDeviceValidators(), validateRequest,  DeviceController.getPairedDevices);
 router.post('/', decodeUserToken, addDeviceValidators(), validateRequest, DeviceController.addDevice);
-router.put('/:deviceId', decodeUserToken, updateDeviceValidators(), validateRequest, DeviceController.updateDevice);
-router.delete('/deviceId', decodeUserToken,removeDeviceValidators(), validateRequest, DeviceController.removeDevice);
+router.patch('/:deviceId', decodeUserToken, updateDeviceValidators(), validateRequest, DeviceController.updateDevice);
+router.delete('/:deviceId', decodeUserToken,removeDeviceValidators(), validateRequest, DeviceController.removeDevice);
 
 module.exports = router;

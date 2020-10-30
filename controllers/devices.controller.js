@@ -20,7 +20,7 @@ function getPairedDevices(request, response, next) {
 
     let userId = request.loggedInUserDetails && request.loggedInUserDetails.userId;
     let houseIds = request.params.houseId;
-    return DeviceService.getPairedDevicesList(userId, houseIds)
+    return DeviceService.getPairedDevicesList(userId, houseIds, request.query)
         .then(sendResponse)
         .catch(handleError);
 }
