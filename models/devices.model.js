@@ -16,6 +16,7 @@ const DeviceSchema = new Schema({
 
 DeviceSchema.statics.updateDevice = updateDevice;
 DeviceSchema.statics.removeDevice = removeDevice;
+DeviceSchema.statics.getMQTTTopicByDeviceId = getMQTTTopicByDeviceId;
 
 const Device = database.addModel('Devices', DeviceSchema);
 
@@ -39,3 +40,13 @@ function updateDevice(deviceId, deviceDetails) {
 function removeDevice(deviceId) {
     return Device.deleteOne({ _id: deviceId });
 }
+
+/**
+ * Gets MQTT topic for a device
+ * @author Asheesh Bhuria
+ * @param {String} deviceId 
+ */
+function getMQTTTopicByDeviceId(deviceId) {
+    return Device.findById(deviceId)
+        .then((device) => device && device.mqttTopic)
+} 

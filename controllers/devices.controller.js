@@ -9,6 +9,7 @@ exports.getPairedDevices = getPairedDevices;
 exports.addDevice = addDevice;
 exports.removeDevice = removeDevice;
 exports.updateDevice = updateDevice;
+exports.communicateToDevice = communicateToDevice;
 
 /**
  * Gets all the paired devices for a User based on his house number
@@ -66,13 +67,35 @@ function updateDevice(request, response, next) {
     let sendResponse = ResponseHelper.createResponseHandler(response);
     let handleError = ResponseHelper.createErrorHandler(response);
 
-    let deviceId =request.params.deviceId;
+    let deviceId = request.params.deviceId;
     return DeviceService.updateDevice(deviceId, request.body)
         .then(createResponse('Device updated successfuly'))
         .then(sendResponse)
         .catch(handleError);
 }
 
+/**
+ * This function is responsible for communicating the instructions to linked device
+ * @author Asheesh Bhuria
+ */
+function communicateToDevice(request, response, next) {
+    let sendResponse = ResponseHelper.createResponseHandler(response);
+    let handleError = ResponseHelper.createErrorHandler(response);
+
+    let deviceId = request.params.deviceId;
+    let sendInstructionsToDevice = DeviceService.communicateToDevice(request.body);
+    return Device.getMQTTTopicByDeviceId(deviceId)
+        .then(sendInstructionsToDevice)
+        .then(createResponse('Success'))
+        .then(sendResponse)
+        .catch(handleError)
+}
+
+/**
+ * Creates response for Device APIs
+ * @author Asheesh Bhuria
+ * @param {String} message 
+ */
 function createResponse(message) {
     return function() {
         return {

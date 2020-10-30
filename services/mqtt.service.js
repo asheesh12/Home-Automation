@@ -4,6 +4,7 @@ exports.createMQTTTopicForUser = createMQTTTopicForUser;
 exports.subscribe = subscribe;
 exports.unsubscribe = unsubscribe;
 exports.onLiveFeed = onLiveFeed;
+exports.sendMessageToDevice = sendMessageToDevice; 
 
 /**
  * Creates MQTT Topic from User id and house id
@@ -46,6 +47,16 @@ function unsubscribe(topic) {
 function onLiveFeed(topic, message) {
   let userId = extractUserIdFromTopic(topic)
   SocketService.sendMessage(userId, message) // Socket id is the userId
+}
+
+/**
+ * Publishes message to the linked type using it's mqtt topic
+ * @author Asheesh Bhuria
+ * @param {String} deviceMQTTTopic 
+ * @param {Object} data 
+ */
+function sendMessageToDevice(deviceMQTTTopic, data) {
+  mqttClient.publish(deviceMQTTTopic, data)
 }
 
 /**

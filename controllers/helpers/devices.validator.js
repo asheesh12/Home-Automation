@@ -4,6 +4,7 @@ exports.pairedDeviceValidators = pairedDeviceValidators;
 exports.addDeviceValidators = addDeviceValidators;
 exports.updateDeviceValidators = updateDeviceValidators;
 exports.removeDeviceValidators = removeDeviceValidators;
+exports.communicateDeviceValidators = communicateDeviceValidators;
 
 /**
  * Gets validators for fetching the list of paired devices
@@ -71,6 +72,19 @@ function removeDeviceValidators() {
  * @author Asheesh Bhuria
  */
 function updateDeviceValidators() {
+    return [
+        param('deviceId')
+            .exists()
+            .isString()
+            .notEmpty()
+    ];
+}
+
+/**
+ * Gets validators for adding a device
+ * @author Asheesh Bhuria
+ */
+function communicateDeviceValidators() {
     return [
         param('deviceId')
             .exists()
