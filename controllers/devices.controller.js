@@ -18,10 +18,9 @@ function getPairedDevices(request, response, next) {
     let sendResponse = ResponseHelper.createResponseHandler(response);
     let handleError = ResponseHelper.createErrorHandler(response);
 
-    let userId = request.loggedInUserDetails || request.loggedInUserDetails.userId;
-    let houseIds = request.params.houseIds;
-    
-    return DeviceService.getPairedDevicesAndStats(userId, houseIds)
+    let userId = request.loggedInUserDetails && request.loggedInUserDetails.userId;
+    let houseIds = request.params.houseId;
+    return DeviceService.getPairedDevicesList(userId, houseIds)
         .then(sendResponse)
         .catch(handleError);
 }

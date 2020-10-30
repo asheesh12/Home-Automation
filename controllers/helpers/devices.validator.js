@@ -11,8 +11,8 @@ exports.removeDeviceValidators = removeDeviceValidators;
  */
 function pairedDeviceValidators() {
     return [
-        param('houseIds')
-            .isNotEmpty()
+        param('houseId')
+            .notEmpty()
     ];
 }
 
@@ -46,7 +46,7 @@ function addDeviceValidators() {
             .exists()
             .isString()
             .notEmpty(),
-        body('houseIds')
+        body('houseId')
             .exists()
             .isString()
             .notEmpty()
