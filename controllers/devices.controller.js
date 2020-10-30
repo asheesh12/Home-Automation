@@ -1,7 +1,7 @@
 const database = require('../config/database.config');
 
-const Device = database.getModel('Device');
-const User = database.getModel('User');
+const Device = require('../models/devices.model');
+const User = require('../models/users.model');
 const DeviceService = require('../services/devices.services.js');
 const ResponseHelper = require('../services/response.helper');
 

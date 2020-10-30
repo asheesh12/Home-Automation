@@ -1,5 +1,4 @@
-const database = require('../config/database.config');
-const User = database.getModel('User');
+const User = require('../models/users.model');
 
 exports.getPairedDevicesForUser = getPairedDevicesForUser; 
 

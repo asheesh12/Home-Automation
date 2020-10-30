@@ -14,10 +14,10 @@ const UserSchema = new Schema({
     locationIds: { type: [String] }
 })
 
-User.statics.findByEmailAddress = findByEmailAddress;
-User.statics.getPairedDevicesForUser = getPairedDevicesForUser;
-User.statics.addDeviceToList = addDeviceToList;
-User.statics.removeDeviceFromList = removeDeviceFromList;
+UserSchema.statics.findByEmailAddress = findByEmailAddress;
+UserSchema.statics.getPairedDevicesForUser = getPairedDevicesForUser;
+UserSchema.statics.addDeviceToList = addDeviceToList;
+UserSchema.statics.removeDeviceFromList = removeDeviceFromList;
 
 const User = database.addModel('Users', UserSchema);
 

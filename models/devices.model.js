@@ -1,4 +1,4 @@
-const database = require('../config/database');
+const database = require('../config/database.config');
 
 const Schema =  database.Schema;
 
@@ -10,14 +10,16 @@ const DeviceSchema = new Schema({
     serialNumber: { type: String, required: true, unique: true },
     company: { type: String, required: true },
     mqttTopic: { type: String, required: true },
-    user: { type: ObjectId, required: true },
+    user: { type: Schema.Types.ObjectId, required: true },
     houseId: { type: String, required: true }
 })
 
-Device.statics.updateDevice = updateDevice;
-Device.statics.removeDevice = removeDevice;
+DeviceSchema.statics.updateDevice = updateDevice;
+DeviceSchema.statics.removeDevice = removeDevice;
 
 const Device = database.addModel('Devices', DeviceSchema);
+
+module.exports = Device;
 
 /**
  * Updates device

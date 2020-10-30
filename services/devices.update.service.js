@@ -1,6 +1,4 @@
-const database = require('../config/database.config');
-const { updateDevice } = require('../controllers/devices.controller');
-const Device = database.getModel('Device');
+const Device = require('../models/devices.model');
 
 exports.updateDevice = updateDevice; 
 

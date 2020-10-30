@@ -1,5 +1,5 @@
 const database = require('../config/database.config');
-const Device = database.getModel('Device');
+const Device = require('../models/devices.model');
 
 exports.addDevice = addDevice; 
 
