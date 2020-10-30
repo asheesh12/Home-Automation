@@ -19,6 +19,6 @@ function addDevice(requestBody) {
  * @author Asheesh Bhuria
  * @param {Object} param0 Device details  
  */
-function extractDeviceDetails({ name, product, productType, serialNumber, company, mqttTopic, user, houseId }) {
-    return { name, product, productType, serialNumber, company, mqttTopic, user, houseId} ;
+function extractDeviceDetails({ _id, name, product, productType, serialNumber, company, mqttTopic, user, houseId }) {
+    return { _id, name, product, productType, serialNumber, company, mqttTopic, user, houseId} ;
 }

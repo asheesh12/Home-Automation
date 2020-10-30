@@ -20,7 +20,7 @@ function createErrorHandler(response) {
 function handleError(response, error) {
     if (!error) return sendServerErrorResponse(response);
     switch(error.reason) {
-        case ERROR_REASONS.NOT_FOUND:
+        case ERROR_REASONS.NOT_FOUND_ERROR:
             response.status(404);
             break;
         default:
