@@ -30,7 +30,7 @@ MQTT or the Message Queue Telemetry Transport is a lightweight protocol which is
  
 The IoT devices communicate with the Node.JS server (for sending live data feed and receiving instructions) using MQTT protocol
 
-Client and Server Communicate using (1) TCP/UDP (CRUD APIs),  (2) WebSockets (client instructs server to subscribe/unsubscribe in order to start/stop receiving live feed) and (3) Redis Pub/Sub (server transmits all the live feed to the client)
+Client and Server Communicate using (1) TCP/UDP (CRUD APIs),  (2) WebSockets (client instructs server to subscribe/unsubscribe to MQTT topics in order to start/stop receiving live feed) and (3) Redis Pub/Sub (server transmits all the live feed to the client)
 
 ---
 
