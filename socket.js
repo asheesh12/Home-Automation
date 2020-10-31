@@ -1,6 +1,6 @@
 const socketApp = require('express')();
 const socketServer = require('http').createServer(socketApp);
-socketServer.listen(8080); //or 3000
+socketServer.listen(80);
 const io = require('socket.io')(socketServer);
 const socketService = require('./services/socket.service');
 const chalk = require('chalk');

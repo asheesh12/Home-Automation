@@ -18,7 +18,7 @@
 //         else mqttClient.once('connect', connectToServerSocket);
 
 //         function connectToServerSocket() {
-//             socket = io.connect('http://localhost:8080', {
+//             socket = io.connect('http://localhost:80', {
 //                 'query': { 'userId': '5f9c591792eb3f3fcb89131e', 'houseId': 'house1' },
 //                 'reconnection delay' : 0,
 //                 'reopen delay' : 0,
