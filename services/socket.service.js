@@ -1,10 +1,7 @@
-const sockets = require('./sockets');
 const mqttService = require('./mqtt.service');
 
 exports.onSocketSubscribeEvent = onSocketSubscribeEvent; 
 exports.onSocketUnsubscribeEvent = onSocketUnsubscribeEvent; 
-exports.onSocketDisconnectedEvent = onSocketDisconnectedEvent; 
-exports.sendMessage = sendMessage;
 
 /**
  * Callback for 'subscribe' event (via websocket protocol).
@@ -19,7 +16,6 @@ function onSocketSubscribeEvent(socket) {
         let houseId = socket.handshake.query.houseId;
         let topic = mqttService.createMQTTTopicForUser(userId, houseId);
         mqttService.subscribe(topic);
-        sockets.addSocket(userId, socket);
     }
 }
 
@@ -36,29 +32,5 @@ function onSocketUnsubscribeEvent(socket) {
         let houseId = socket.handshake.query.houseId;
         let topic = mqttService.createMQTTTopicForUser(userId, houseId);
         mqttService.unsubscribe(topic);
-        sockets.removeSocket(userId);
     }
-}
-
-/**
- * Callback for 'disconnect' event (via websocket protocol)
- * @author Asheesh Bhuria
- * @param {Object} socket - Socket object 
- */
-function onSocketDisconnectedEvent(socket) {
-    return function() {
-        let userId = socket.handshake.query.userId;
-        sockets.removeSocket(userId);
-    }
-}
-
-/**
- * Sends message to the client via websockets
- * @author Asheesh Bhuria
- * @param {String} userId 
- * @param {String} liveFeed 
- * @param {String} message 
- */
-function sendMessage(userId, liveFeed, message) {
-    return sockets.sendMessage(userId, liveFeed, message);
 }

@@ -1,5 +1,6 @@
 const mqttClient = require('../config/mqtt.config');
-const SocketService = require('./socket.service');
+const RedisService = require('./redis.service');
+const chalk = require('chalk');
 
 exports.createMQTTTopicForUser = createMQTTTopicForUser;
 exports.subscribe = subscribe;
@@ -46,8 +47,9 @@ function unsubscribe(topic) {
  * @param {String} message 
  */
 function onLiveFeed(topic, message) {
-  let userId = extractUserIdFromTopic(topic)
-  SocketService.sendMessage(userId, 'liveFeed', message) // Socket id is the userId
+  let redisRoom = extractRoomForRedis(topic);
+  if (!redisRoom) return console.log(chalk.red("Invalid room for Redis "));
+  RedisService.publishMessage(redisRoom, message);
 }
 
 /**
@@ -64,7 +66,9 @@ function sendMessageToDevice(deviceMQTTTopic, data) {
  * Extracts user id from mqtt topic
  * @param {String} topic 
  */
-function extractUserIdFromTopic(topic) {
+function extractRoomForRedis(topic) {
   if (!topic) return '';
-  return topic.split('/')[1];
+  let splitTopic = topic.split('/');
+  if (splitTopic.length < 3) return;
+  return topic.split('/')[1] +'/' + topic.split('/')[2];
 }
