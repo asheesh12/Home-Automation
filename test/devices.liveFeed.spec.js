@@ -1,4 +1,4 @@
-// // Commented by Asheesh Bhuria because this test case will always fail as we are not using stable MQTT broker
+// Commented by Asheesh Bhuria because this test case will always fail as we are not using stable MQTT broker
 
 // const socketApp = require('../socket.js');
 // const app = require('../app');
@@ -6,7 +6,7 @@
 // const mongoose = require('mongoose');
 // const io = require('socket.io-client');
 // const mqttClient = require('../config/mqtt.config');
-// const chalk = require('chalk');
+// const redisSubClient = require('redis').createClient();
 
 // describe('Socket Live Feed', function() {
 
@@ -30,11 +30,11 @@
 //         }
 //     });
     
+//     // TODO - Update this based on redis sub client
 //     it('receive live feed', function(done) {
 //         socket.emit('subscribe')
-//         socket.on('liveFeed', (data) => {
-//             done()
-//         })
+//         redisSubClient.subscribe('5f9c591792eb3f3fcb89131e/house1');
+//         redisSubClient.on('5f9c591792eb3f3fcb89131e/house1', (channel, message) => done())
 //     }).timeout(200000);
 
 // });
