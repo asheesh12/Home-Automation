@@ -70,5 +70,5 @@ function extractRoomForRedis(topic) {
   if (!topic) return '';
   let splitTopic = topic.split('/');
   if (splitTopic.length < 3) return;
-  return topic.split('/')[1] +'/' + topic.split('/')[2];
+  return splitTopic[1] +'/' + splitTopic[2];
 }
