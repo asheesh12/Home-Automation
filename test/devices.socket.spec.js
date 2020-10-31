@@ -1,6 +1,8 @@
-// Commented by Asheesh Bhuria because this test case will always fail as we are not using stable MQTT broker
+// // Commented by Asheesh Bhuria because this test case will always fail as we are not using stable MQTT broker
 
 // const socketApp = require('../socket.js');
+// const app = require('../app');
+// const request = require('supertest');
 // const mongoose = require('mongoose');
 // const io = require('socket.io-client');
 // const mqttClient = require('../config/mqtt.config');

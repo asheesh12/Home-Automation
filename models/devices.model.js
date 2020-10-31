@@ -9,7 +9,7 @@ const DeviceSchema = new Schema({
     productType: { type: String, required:true },
     serialNumber: { type: String, required: true, unique: true },
     company: { type: String, required: true },
-    mqttTopic: { type: String, required: true },
+    mqttTopic: { type: String, required: true }, // the mqtt topic on which the device receive's commands 
     user: { type: Schema.Types.ObjectId, required: true },
     houseId: { type: String, required: true }
 })

@@ -57,7 +57,7 @@ function onLiveFeed(topic, message) {
  * @param {Object} data 
  */
 function sendMessageToDevice(deviceMQTTTopic, data) {
-  mqttClient.publish(deviceMQTTTopic, data)
+  return mqttClient.publish(deviceMQTTTopic, data);
 }
 
 /**

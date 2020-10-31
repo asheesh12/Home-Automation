@@ -83,7 +83,7 @@ function communicateToDevice(request, response, next) {
     let handleError = ResponseHelper.createErrorHandler(response);
 
     let deviceId = request.params.deviceId;
-    let sendInstructionsToDevice = DeviceService.communicateToDevice(request.body);
+    let sendInstructionsToDevice = DeviceService.communicateToDevice(JSON.stringify(request.body));
     return Device.getMQTTTopicByDeviceId(deviceId)
         .then(sendInstructionsToDevice)
         .then(createResponse('Success'))

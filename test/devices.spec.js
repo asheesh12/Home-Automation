@@ -77,7 +77,7 @@ describe('POST /device', function() {
                         done();
                     })
             })
-        });
+    });
 
     it('GET /device', function(done) {
         request(app)
@@ -85,12 +85,23 @@ describe('POST /device', function() {
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) { 
-                console.log(res.body)
                 if (err) return done(err); 
                 if (!(Array.isArray(res.body) && res.body.length == 1)) return done(new Error('Unable to get devices'));
                 done();
             })
     });
+
+    it('POST /device/message/:id', function(done) {
+        request(app)
+            .post('/api/devices/message/5f9c773fb5b9a00e909b47e5')
+            .send({"instructions": "Instructions"})
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end(function(err, res) { 
+                if (err) return done(err); 
+                done();
+            })
+        });
 
 
     it('PATCH /devices', function(done) {
