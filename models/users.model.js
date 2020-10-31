@@ -10,8 +10,8 @@ const UserSchema = new Schema({
     emailAddress: { type: String, required: true, unique: true }, // emailAddress is used as an index
     password: { type: String, required: true },
     roles: { type: [String], required: true },
-    devices: [{ type: Schema.Types.ObjectId, ref: 'Devices', default: undefined }],
-    locationIds: { type: [String] }
+    devices: [{ type: Schema.Types.ObjectId, ref: 'Devices' }],
+    houseIds: { type: [String] }
 })
 
 UserSchema.statics.findByEmailAddress = findByEmailAddress;
