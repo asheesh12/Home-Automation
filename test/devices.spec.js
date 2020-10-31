@@ -2,6 +2,7 @@ const app = require('../app.js');
 const request = require('supertest');
 const Device = require('../models/devices.model');
 const User = require('../models/users.model');
+const mqttClient = require('../config/mqtt.config');
 var { connection } = require('../config/database.config');
 
 const mongoose = require('mongoose');
@@ -13,7 +14,9 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 
 
-describe('POST /device', function() {
+describe('Device module', function() {
+
+    // Making sure database connection is established before unit test starts
     before(function(done) {
         this.timeout(10000);
         if (connection.readyState == 1) return createUser()
@@ -35,6 +38,13 @@ describe('POST /device', function() {
                 ]
              }).then(() => done())
         }
+    })
+
+    // Making sure connection with MQTT broker is established before unit test starts
+    before(function(done) {
+        this.timeout(300000);
+        if (mqttClient.connected) return done();
+        mqttClient.once('connect', () => done());
     })
 
     after(function(done) {
