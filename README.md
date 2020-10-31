@@ -29,7 +29,7 @@ For development, we only need Node.js, MongoDB and MQTT Broker.
 
 ---   
 
-## Functionalities:-
+## Functionalities
     1. List all smart devices linked to a user
     2. Add new smart device
     3. Perform an operation on a device (using MQTT protocol)
