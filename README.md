@@ -39,7 +39,7 @@ Client and Server Communicate using (1) TCP/UDP (CRUD APIs),  (2) WebSockets (cl
 ### Installing Redis
     $ sudo apt-get install redis-server
 
-### Setting up Node environment
+### Setting up Node.JS server
 
     $ git clone https://github.com/asheesh12/Home-Automation.git
     $ cd Home-Automation
