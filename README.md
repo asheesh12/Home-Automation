@@ -37,7 +37,8 @@ For development, we only need Node.js, MongoDB and MQTT Broker.
     6. User sign up / log in (Pending)
     7. Live feed of status from all the devices using MQTT protocol & Socket.io
 
-##
+## 
+
 Note* - I am not including several necessary functionalities like:-
     1. User email verification
     2. User forgot password
