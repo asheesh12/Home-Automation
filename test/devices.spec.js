@@ -21,7 +21,7 @@ describe('Device module', function() {
         this.timeout(10000);
         if (connection.readyState == 1) return createUser()
         connection.on('open',createUser);
-
+        connection.dropDatabase(createUser);
         function createUser() {
             User.insertMany({
                 "_id" : "5f9c591792eb3f3fcb89131e",
