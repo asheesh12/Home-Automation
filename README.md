@@ -6,12 +6,13 @@ With Home-Automation we can register devices, get live update on devices and als
 
 All the smart devices communicate using MQTT Protocol
 
-
 ---
+
 ## Requirements
 
 For development, we only need Node.js, MongoDB and MQTT Broker.
 
+---
 
 ## Install
 
