@@ -12,7 +12,7 @@ All the smart devices communicate using MQTT Protocol
 
 For development we require Node.js, MongoDB, Redis and any stable MQTT Broker.
 
-MongoDB provides flexibility in terms of data manupilation.
+MongoDB provides flexibility in terms of data manupilation and scales well.
 
 Redis is an in-memory datastructure store which can be used as database, cache and message broker.
 Redis Pub/Sub is lightweigth and highly scalable. Works well for real time communication as it only supports transient messages.
