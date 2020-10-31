@@ -23,7 +23,7 @@ MQTT or the Message Queue Telemetry Transport is a lightweight protocol which is
 
 ## Setting Up Project
 
-### Setting up Redis
+### Installing Redis
     $ sudo apt-get install redis-server
 
 ### Setting up Node environment
