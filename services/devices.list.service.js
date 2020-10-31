@@ -1,4 +1,4 @@
-const UserService = require('./user.service');
+const UserService = require('./users.service');
 
 exports.getPairedDevicesList = getPairedDevicesList; 
 
