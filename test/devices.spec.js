@@ -1,9 +1,11 @@
 const app = require('../app.js');
 const request = require('supertest');
 const Device = require('../models/devices.model');
+const User = require('../models/users.model');
 var { connection } = require('../config/database.config');
 
 const mongoose = require('mongoose');
+const { utils } = require('mocha');
 
 // Configuring mongoose to avoid deprecation warnings
 mongoose.set('useFindAndModify', false);
@@ -12,13 +14,34 @@ mongoose.set('useUnifiedTopology', true);
 
 
 describe('POST /device', function() {
+    before(function(done) {
+        this.timeout(10000);
+        if (connection.readyState == 1) return createUser()
+        connection.on('open',createUser);
 
-    beforeEach(function(done) {
-        if (connection.readyState == 1) return done()
-        connection.on('open',done);
+        function createUser() {
+            User.insertMany({
+                "_id" : "5f9c591792eb3f3fcb89131e",
+                "firstName" : "Asheesh",
+                "lastName" : "Bhuria",
+                "password": "hashed_password",
+                "emailAddress" : "asheesh.bhuria@gmail.com",
+                "roles" : [ 
+                    "user"
+                ],
+                "houseIds" : [ 
+                    "house1", 
+                    "house2"
+                ]
+             }).then(() => done())
+        }
     })
 
-    it('responds with 400 error', function(done) {
+    after(function(done) {
+        User.findByIdAndDelete("5f9c591792eb3f3fcb89131e").then(() => done());
+    })
+
+    it('Checking validators for POST responds, it should respond with 400 error', function(done) {
         request(app)
             .post('/devices/')
             .send({})
@@ -30,7 +53,7 @@ describe('POST /device', function() {
             })
     });
 
-    it('responds with 200', function(done) {
+    it('POST /device', function(done) {
         request(app)
             .post('/devices/')
             .send({
@@ -55,17 +78,22 @@ describe('POST /device', function() {
                     })
             })
         });
-});
+
+    it('GET /device', function(done) {
+        request(app)
+            .get('/devices/available/house1')
+            .set('Accept', 'application/json')
+            .expect(200)
+            .end(function(err, res) { 
+                console.log(res.body)
+                if (err) return done(err); 
+                if (!(Array.isArray(res.body) && res.body.length == 1)) return done(new Error('Unable to get devices'));
+                done();
+            })
+    });
 
 
-describe('PATCH /device', function() {
-
-    beforeEach(function(done) {
-        if (connection.readyState == 1) return done()
-        connection.on('open',done);
-    })
-    
-    it('responds with 200', function(done) {
+    it('PATCH /devices', function(done) {
         request(app)
             .patch('/devices/5f9c773fb5b9a00e909b47e5')
             .send({
@@ -82,17 +110,9 @@ describe('PATCH /device', function() {
                         done();
                     })
             })
-        });
-});
+    });
 
-
-describe('DELETE /device', function() {
-    beforeEach(function(done) {
-        if (connection.readyState == 1) return done()
-        connection.on('open',done);
-    })
-    
-    it('responds with 200', function(done) {
+    it('DELETE /device', function(done) {
         request(app)
             .delete('/devices/5f9c773fb5b9a00e909b47e5')
             .set('Accept', 'application/json')
@@ -105,5 +125,5 @@ describe('DELETE /device', function() {
                         done();
                     })
             })
-        });
+    });
 });
