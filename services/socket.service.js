@@ -1,9 +1,10 @@
-const sockets = require('../services/socket');
+const sockets = require('./sockets');
 const mqttService = require('./mqtt.service');
 
 exports.onSocketSubscribeEvent = onSocketSubscribeEvent; 
 exports.onSocketUnsubscribeEvent = onSocketUnsubscribeEvent; 
 exports.onSocketDisconnectedEvent = onSocketDisconnectedEvent; 
+exports.sendMessage = sendMessage;
 
 /**
  * Callback for 'subscribe' event (via websocket protocol).
@@ -49,4 +50,15 @@ function onSocketDisconnectedEvent(socket) {
         let userId = socket.handshake.query.userId;
         sockets.removeSocket(userId);
     }
+}
+
+/**
+ * Sends message to the client via websockets
+ * @author Asheesh Bhuria
+ * @param {String} userId 
+ * @param {String} liveFeed 
+ * @param {String} message 
+ */
+function sendMessage(userId, liveFeed, message) {
+    return sockets.sendMessage(userId, liveFeed, message);
 }

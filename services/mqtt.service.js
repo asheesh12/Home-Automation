@@ -1,4 +1,5 @@
 const mqttClient = require('../config/mqtt.config');
+const SocketService = require('./socket.service');
 
 exports.createMQTTTopicForUser = createMQTTTopicForUser;
 exports.subscribe = subscribe;
@@ -46,7 +47,7 @@ function unsubscribe(topic) {
  */
 function onLiveFeed(topic, message) {
   let userId = extractUserIdFromTopic(topic)
-  SocketService.sendMessage(userId, message) // Socket id is the userId
+  SocketService.sendMessage(userId, 'liveFeed', message) // Socket id is the userId
 }
 
 /**

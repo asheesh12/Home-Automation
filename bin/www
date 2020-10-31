@@ -7,8 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('home-automation:server');
 var http = require('http');
-const io = require('socket.io')(server);
-const socketService = require('../services/socket.service');
+require('../socket')
 
 /**
  * Get port from environment and store in Express.
@@ -90,9 +89,3 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-io.on('connection', socket => {
-  socket.on('subscribe', socketService.onSocketSubscribeEvent(socket));
-  socket.on('unsubscribe', socketService.onSocketUnsubscribeEvent(socket));
-  socket.on('disconnect', socketService.onSocketUnsubscribeEvent(socket));
-});
