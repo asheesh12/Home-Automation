@@ -43,7 +43,7 @@ describe('POST /device', function() {
 
     it('Checking validators for POST responds, it should respond with 400 error', function(done) {
         request(app)
-            .post('/devices/')
+            .post('/api/devices/')
             .send({})
             .set('Accept', 'application/json')
             .expect(400)
@@ -55,7 +55,7 @@ describe('POST /device', function() {
 
     it('POST /device', function(done) {
         request(app)
-            .post('/devices/')
+            .post('/api/devices/')
             .send({
                 "_id": "5f9c773fb5b9a00e909b47e5",
                 "name": "Samsung AC Masterbedroom",
@@ -81,7 +81,7 @@ describe('POST /device', function() {
 
     it('GET /device', function(done) {
         request(app)
-            .get('/devices/available/house1')
+            .get('/api/devices/available/house1')
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) { 
@@ -95,7 +95,7 @@ describe('POST /device', function() {
 
     it('PATCH /devices', function(done) {
         request(app)
-            .patch('/devices/5f9c773fb5b9a00e909b47e5')
+            .patch('/api/devices/5f9c773fb5b9a00e909b47e5')
             .send({
                 "name": "Samsung AC Masterbedroom - Updated name",
                 })
@@ -114,7 +114,7 @@ describe('POST /device', function() {
 
     it('DELETE /device', function(done) {
         request(app)
-            .delete('/devices/5f9c773fb5b9a00e909b47e5')
+            .delete('/api/devices/5f9c773fb5b9a00e909b47e5')
             .set('Accept', 'application/json')
             .expect(200)
             .end(function(err, res) { 
